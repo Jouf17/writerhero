@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur WriterHero{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Bienvenue sur WriterHero</h1>
+    <p>Sur WriterHero vous pourrez lire, mais aussi écrire des livres "dont vous êtes le héros". A chaque page, des choix décisifs feront changer l'histoire...
+
+    <h2>Filtre</h2>
+    {{ form(form) }}
+
+    <h2>Les Books</h2>
+    {% for book in books %}
+        <div class="col-md-4">
+            <div class="book-item">
+                <a href="{{ path('book', {'slug' : book.slug}) }}">
+                    <h3>{{ book.name }}</h3>
+                    <p>{{ book.description }}</p>
+                    <img src="uploads/illustrations/{{ book.illustration }}" alt="{{ book.name }}" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

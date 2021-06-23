@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rédaction du Book - Nouvelle page - WriterHero{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Mon espace Writer</h1>
+    <h2>Book : "{{ book.name }}" - {% if page is defined %}Rédaction de la page {{ page.number }}{% else %}Rédaction d'une nouvelle page{% endif %}</h2>
+    <a href="{{ path('writing_book', {'slugBook' : book.slug}) }}">Retour</a>
+    <hr>
+    {{ form(form) }}
+    <hr>
+</div>
+{% endblock %}

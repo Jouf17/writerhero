@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rédaction du Book - WriterHero{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Mon espace Writer</h1>
+    <a href="{{ path('account') }}">Retour</a>
+    <h2>Rédaction du //Book//</h2>
+    <p><a href="{{path('account_edit_book', {'slugBook' : book.slug}) }}">Modifier les infos du Book</a></p>
+    <hr>
+    <a href="{{ path('writing_book_new_page', {'slugBook' : book.slug}) }}">Écrire une nouvelle page</a>
+    <hr>
+    
+    {% if pages|length > 0 %}
+      <strong>Les pages de votre Book : "{{ book.name }}"</strong>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Numéro de page</th>
+            <th scope="col">Nom de la page</th>
+            <th scope="col">Éditer la page</th>
+            <th scope="col">Supprimer la page</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for page in pages %}
+            <tr>
+              <th scope="row">{{page.number}}</th>
+              <td>{% if page.name is not empty %}{{page.name}}{% endif %}</td>
+              <td><a href="{{ path('writing_book_edit_page', {'slugBook' : book.slug, 'numPage' : page.number}) }}"><img src="{{ asset('assets/images/crayon.svg') }}" width="25px" alt="Éditer la page"></a></td>
+              <td><a href="{{ path('writing_book_delete_page', {'slugBook' : book.slug, 'numPage' : page.number}) }}"><img src="{{ asset('assets/images/poubelle.svg') }}" width="25px" alt="Supprimer la page"></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Il n'y a pas encore de pages pour ce Book.</p>
+    {% endif %}
+    <hr>
+</div>
+{% endblock %}

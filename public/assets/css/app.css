@@ -1,0 +1,9 @@
+html, body { overflow-x:hidden}
+html { margin:0; padding:0}
+body{margin:0;}
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; margin:0; padding:0}
+.container{max-width: 1160px;position:relative;margin:0 auto; padding:0;}
+
+/*HEADER*/
+header{background:blue;height:100px;}
+header a#logo{color:#fff;display:block;width:150px;height:100%;font-size:18px;padding-top:35px;}

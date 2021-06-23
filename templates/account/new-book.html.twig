@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Écrire un nouveau Book - WriterHero{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Écrire un nouveau Book</h1>
+    <a href="{{ path('account')}}">Retourner à mon compte</a>
+    <hr>
+    {# {% if notification %}
+        <div class="alert alert-info">{{ notification }}</div>
+    {% endif %} #}
+    {{ form(form) }}
+    <hr>
+    
+</div>
+{% endblock %}

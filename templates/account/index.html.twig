@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace Writer - WriterHero{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Mon espace Writer</h1>
+    <p>Bienvenue dans votre espace Writer, {{ app.user.pseudo }} ! C'est ici que vous allez pouvoir écrire vos premiers Books.</p>
+    <hr>
+    {% if app.user.books|length == 0 %}
+        <p>Vous n'avez pas encore créé de Book. Pour en créer un veuillez <a href="{{ path('account_new_book') }}">cliquer ici</a>.</p>
+    {% else %}
+        - Mes books existants<br/>
+        <div class="row">
+        {% for book in app.user.books %}
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="uploads/illustrations/{{ book.illustration }}" alt="{{ book.name }}" class="img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.name }}</h5>
+                        <p class="card-text">{{ book.description }}</p>
+                        <a href="{{ path('writing_book', {'slugBook' : book.slug}) }}" class="btn btn-primary">Rédiger le Book</a>
+                        <a href="{{ path('delete_book', {'slugBook' : book.slug}) }}" class="btn btn-primary">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}  
+        </div>      
+    {% endif %}
+    
+    <hr>
+    <a href="{{ path('account_password') }}">- Modifier mon mot de passe</a><br/>
+    <a href="{{ path('account_new_book') }}">- Écrire un nouveau Book</a><br/>
+    <hr>
+</div>
+{% endblock %}

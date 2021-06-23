@@ -1,0 +1,19 @@
+<header>
+    <div class="container">
+        <a id="logo" href="{{path('home')}}">WriterHero</a>
+    </div>
+    <nav>
+    {% if app.user %}
+        <a href="{{path('account')}}">Mon espace Writer <small>({{ app.user.pseudo }})</small></a> | <a href="{{path('app_logout')}}">Déconnexion</a>
+    {% else %}
+        <a href="{{path('app_login')}}">Connexion</a> | <a href="{{path('register')}}">Inscription</a>
+    {% endif %}
+
+
+
+        
+        
+        
+        
+    </nav>
+</header>
