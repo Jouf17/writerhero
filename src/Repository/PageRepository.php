@@ -47,9 +47,7 @@ class PageRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p')
             ->where('p.book = :book')
-            ->setParameter('book', $book)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('book', $book);
     }
 
     // /**

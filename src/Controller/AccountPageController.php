@@ -27,23 +27,21 @@ class AccountPageController extends AbstractController
     public function newPage(Request $request, PageRepository $pageRepository, $slugBook): Response
     {
         $page = new Page();
+
         $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
         $countPages = $pageRepository->countPagesByBook($book);
-        $pagesByBook = $pageRepository->findPagesByBook($book);
-        dd($pagesByBook);
+    
         $page->setNumber($countPages + 1);
         $page->setName('Page ' . ($countPages + 1));
         
         $form = $this->createForm(PageType::class, $page, [
-            'pagesByBook' => $pagesByBook
+            'book' => $book
         ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
-            $page->setNumber($countPages + +1);
+            
             $page->setBook($book);
-            $page = $form->getData();
             
             $this->entityManager->persist($page);
             $this->entityManager->flush();
@@ -51,7 +49,6 @@ class AccountPageController extends AbstractController
             return $this->redirectToRoute('writing_book', ['slugBook' => $slugBook]);
         }
         
-
         return $this->render('account/writing-book-writing-page.html.twig', [
             'form' => $form->createView(),
             'book' => $book
