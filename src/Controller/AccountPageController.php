@@ -26,14 +26,17 @@ class AccountPageController extends AbstractController
      */
     public function newPage(Request $request, PageRepository $pageRepository, $slugBook): Response
     {
-        dd($pageRepository);
         $page = new Page();
         $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
-        $countPages = $this->entityManager->getRepository(Page::class)->countPagesByBook($book);
+        $countPages = $pageRepository->countPagesByBook($book);
+        $pagesByBook = $pageRepository->findPagesByBook($book);
+        dd($pagesByBook);
         $page->setNumber($countPages + 1);
         $page->setName('Page ' . ($countPages + 1));
         
-        $form = $this->createForm(PageType::class, $page);
+        $form = $this->createForm(PageType::class, $page, [
+            'pagesByBook' => $pagesByBook
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -8,6 +8,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,7 +34,24 @@ class PageType extends AbstractType
             ])
             ->add('choice_1_text', TextType::class, [
                 'label' => 'Choix 1 - Texte',
-                'required' => true
+                'required' => false
+            ])
+            ->add('choice_1_target', ChoiceType::class, [
+                'label' => 'Choix 1 - Page cible',
+                'choices' => $options['pagesByBook'],
+                'required' => false
+            ])
+            ->add('choice_2_text', TextType::class, [
+                'label' => 'Choix 2 - Texte',
+                'required' => false
+            ])
+            ->add('choice_3_text', TextType::class, [
+                'label' => 'Choix 3 - Texte',
+                'required' => false
+            ])
+            ->add('choice_4_text', TextType::class, [
+                'label' => 'Choix 4 - Texte',
+                'required' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider'
@@ -45,6 +63,7 @@ class PageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Page::class,
+            'pagesByBook' => true
         ]);
     }
 }

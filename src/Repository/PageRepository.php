@@ -42,6 +42,16 @@ class PageRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function findPagesByBook(Book $book)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.book = :book')
+            ->setParameter('book', $book)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Page[] Returns an array of Page objects
     //  */
