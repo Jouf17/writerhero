@@ -19,7 +19,7 @@ class HomeController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    //TODO GENERAL : Mettre les 4 choix dans le formulaire des choix. Rajouter les flashbags partout, sécuriser toutes les fonctions des contrôleurs dans le compte
+    //TODO GENERAL : Rajouter les flashbags partout, sécuriser toutes les fonctions des contrôleurs dans le compte
 
     /**
      * @Route("/", name="home")

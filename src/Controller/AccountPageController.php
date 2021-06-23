@@ -62,7 +62,7 @@ class AccountPageController extends AbstractController
     {
         $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
         $page = $this->entityManager->getRepository(Page::class)->findOneByNumber($numPage, $book);
-
+        
         // $page->setName('Page' . ($countPages + 1));
         // if (!$page || $page->getBook() != $book) {
         //     return $this->redirectToRoute('writing_book', ['slugBook' => $slugBook]);
@@ -71,28 +71,26 @@ class AccountPageController extends AbstractController
         //     return $this->redirectToRoute('account');
         // }
 
-        $form = $this->createForm(PageType::class, $page);
+        $form = $this->createForm(PageType::class, $page, [
+            'book' => $book
+        ]);
         
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) {
-            // $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
-            // $page->setBook($book);
-            // $page = $form->getData();
             
-            // $this->entityManager->persist($page);
+            $this->entityManager->persist($page);
             $this->entityManager->flush();
 
             return $this->redirectToRoute('writing_book', ['slugBook' => $slugBook]);
         }
         
-
         return $this->render('account/writing-book-writing-page.html.twig', [
             'form' => $form->createView(),
             'book' => $book,
             'page' => $page
         ]);
     }
+    // TODO : permettre la suppression sans foreign key constraint
 
      /**
      * @Route("/compte/redaction-du-book/{slugBook}/supprimer-une-page/{numPage}", name="writing_book_delete_page")
