@@ -30,17 +30,18 @@ class AccountPageController extends AbstractController
 
         $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
         $countPages = $pageRepository->countPagesByBook($book);
-    
+        $pagesByBook = $pageRepository->findPagesByBook($book);
+        
         $page->setNumber($countPages + 1);
         $page->setName('Page ' . ($countPages + 1));
         
         $form = $this->createForm(PageType::class, $page, [
-            'book' => $book
+            'pagesByBook' => $pagesByBook
         ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            dd($page);
             $page->setBook($book);
             
             $this->entityManager->persist($page);

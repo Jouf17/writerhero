@@ -91,14 +91,14 @@ class Page
     }
 
     public function getName(): ?string
-    {
+    { 
         return $this->name;
     }
 
     public function setName(?string $name): self
     {
-        $this->name = $name;
-
+        !$name ? $this->name = 'Page ' . $this->getNumber() : $this->name = $name;
+        
         return $this;
     }
 

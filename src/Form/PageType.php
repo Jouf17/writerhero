@@ -19,7 +19,11 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $book = $options['book'];
+        $choices = [];
+        foreach ($options['pagesByBook'] as $k => $page) {
+            $k = $page->getName();
+            $choices[$k] = $page->getNumber();
+        }
         
         $builder
             ->add('number', NumberType::class, [
@@ -44,48 +48,36 @@ class PageType extends AbstractType
                 'label' => 'Choix 1 - Texte',
                 'required' => false
             ])
-            ->add('choice_1_target', EntityType::class, [
+            ->add('choice_1_target', ChoiceType::class, [
                 'label' => 'Choix 1 - Page cible',
-                'class' => Page::class,
-                'query_builder' => function (PageRepository $pageRepository) use ($book) {
-                    return $pageRepository->findPagesByBook($book);
-                },
+                'choices' => $choices,
                 'required' => false
             ])
             ->add('choice_2_text', TextType::class, [
                 'label' => 'Choix 2 - Texte',
                 'required' => false
             ])
-            ->add('choice_2_target', EntityType::class, [
-                'label' => 'Choix 2 - Page cible',
-                'class' => Page::class,
-                'query_builder' => function (PageRepository $pageRepository) use ($book) {
-                    return $pageRepository->findPagesByBook($book);
-                },
+            ->add('choice_2_target', ChoiceType::class, [
+                'label' => 'Choix 1 - Page cible',
+                'choices' => $choices,
                 'required' => false
             ])
             ->add('choice_3_text', TextType::class, [
                 'label' => 'Choix 3 - Texte',
                 'required' => false
             ])
-            ->add('choice_3_target', EntityType::class, [
-                'label' => 'Choix 3 - Page cible',
-                'class' => Page::class,
-                'query_builder' => function (PageRepository $pageRepository) use ($book) {
-                    return $pageRepository->findPagesByBook($book);
-                },
+            ->add('choice_3_target', ChoiceType::class, [
+                'label' => 'Choix 1 - Page cible',
+                'choices' => $choices,
                 'required' => false
             ])
             ->add('choice_4_text', TextType::class, [
                 'label' => 'Choix 4 - Texte',
                 'required' => false
             ])
-            ->add('choice_4_target', EntityType::class, [
-                'label' => 'Choix 4 - Page cible',
-                'class' => Page::class,
-                'query_builder' => function (PageRepository $pageRepository) use ($book) {
-                    return $pageRepository->findPagesByBook($book);
-                },
+            ->add('choice_4_target', ChoiceType::class, [
+                'label' => 'Choix 1 - Page cible',
+                'choices' => $choices,
                 'required' => false
             ])
             ->add('submit', SubmitType::class, [
@@ -98,7 +90,7 @@ class PageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Page::class,
-            'book' => true
+            'pagesByBook' => []
         ]);
     }
 }
