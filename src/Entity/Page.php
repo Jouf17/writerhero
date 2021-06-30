@@ -61,22 +61,22 @@ class Page
     private $choice_4_text;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Page::class)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $choice_1_target;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Page::class)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $choice_2_target;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Page::class)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $choice_3_target;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Page::class)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $choice_4_target;
 
@@ -186,48 +186,48 @@ class Page
         return $this;
     }
 
-    public function getChoice1Target(): ?self
+    public function getChoice1Target(): ?int
     {
         return $this->choice_1_target;
     }
 
-    public function setChoice1Target(?self $choice_1_target): self
+    public function setChoice1Target(?int $choice_1_target): self
     {
         $this->choice_1_target = $choice_1_target;
 
         return $this;
     }
 
-    public function getChoice2Target(): ?self
+    public function getChoice2Target(): ?int
     {
         return $this->choice_2_target;
     }
 
-    public function setChoice2Target(?self $choice_2_target): self
+    public function setChoice2Target(?int $choice_2_target): self
     {
         $this->choice_2_target = $choice_2_target;
 
         return $this;
     }
 
-    public function getChoice3Target(): ?self
+    public function getChoice3Target(): ?int
     {
         return $this->choice_3_target;
     }
 
-    public function setChoice3Target(?self $choice_3_target): self
+    public function setChoice3Target(?int $choice_3_target): self
     {
         $this->choice_3_target = $choice_3_target;
 
         return $this;
     }
 
-    public function getChoice4Target(): ?self
+    public function getChoice4Target(): ?int
     {
         return $this->choice_4_target;
     }
 
-    public function setChoice4Target(?self $choice_4_target): self
+    public function setChoice4Target(?int $choice_4_target): self
     {
         $this->choice_4_target = $choice_4_target;
 
