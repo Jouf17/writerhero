@@ -41,7 +41,7 @@ class AccountPageController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($page);
+            
             $page->setBook($book);
             
             $this->entityManager->persist($page);
@@ -59,10 +59,11 @@ class AccountPageController extends AbstractController
     /**
      * @Route("/compte/redaction-du-book/{slugBook}/editer-une-page/{numPage}", name="writing_book_edit_page")
      */
-    public function editPage(Request $request, $slugBook, $numPage): Response
+    public function editPage(Request $request, PageRepository $pageRepository, $slugBook, $numPage): Response
     {
         $book = $this->entityManager->getRepository(Book::class)->findOneBySlug($slugBook);
-        $page = $this->entityManager->getRepository(Page::class)->findOneByNumber($numPage, $book);
+        $page = $pageRepository->findOneByNumber($numPage, $book);
+        $pagesByBook = $pageRepository->findPagesByBook($book);
         
         // $page->setName('Page' . ($countPages + 1));
         // if (!$page || $page->getBook() != $book) {
@@ -73,7 +74,7 @@ class AccountPageController extends AbstractController
         // }
 
         $form = $this->createForm(PageType::class, $page, [
-            'book' => $book
+            'pagesByBook' => $pagesByBook
         ]);
         
         $form->handleRequest($request);
@@ -91,7 +92,6 @@ class AccountPageController extends AbstractController
             'page' => $page
         ]);
     }
-    // TODO : permettre la suppression sans foreign key constraint
 
      /**
      * @Route("/compte/redaction-du-book/{slugBook}/supprimer-une-page/{numPage}", name="writing_book_delete_page")

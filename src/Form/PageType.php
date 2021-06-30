@@ -58,7 +58,7 @@ class PageType extends AbstractType
                 'required' => false
             ])
             ->add('choice_2_target', ChoiceType::class, [
-                'label' => 'Choix 1 - Page cible',
+                'label' => 'Choix 2 - Page cible',
                 'choices' => $choices,
                 'required' => false
             ])
@@ -67,7 +67,7 @@ class PageType extends AbstractType
                 'required' => false
             ])
             ->add('choice_3_target', ChoiceType::class, [
-                'label' => 'Choix 1 - Page cible',
+                'label' => 'Choix 3 - Page cible',
                 'choices' => $choices,
                 'required' => false
             ])
@@ -76,7 +76,7 @@ class PageType extends AbstractType
                 'required' => false
             ])
             ->add('choice_4_target', ChoiceType::class, [
-                'label' => 'Choix 1 - Page cible',
+                'label' => 'Choix 4 - Page cible',
                 'choices' => $choices,
                 'required' => false
             ])
